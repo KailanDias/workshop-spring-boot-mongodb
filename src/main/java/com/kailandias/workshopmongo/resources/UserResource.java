@@ -1,5 +1,6 @@
 package com.kailandias.workshopmongo.resources;
 
+import com.kailandias.workshopmongo.domain.Post;
 import com.kailandias.workshopmongo.domain.User;
 import com.kailandias.workshopmongo.dto.UserDTO;
 import com.kailandias.workshopmongo.repository.UserRepository;
@@ -57,5 +58,10 @@ public class UserResource {
         return ResponseEntity.noContent().build();
     }
 
+    @GetMapping("/{id}/posts")
+    public ResponseEntity <List<Post>> findPosts(@PathVariable String id) {
+        User obj = service.findById(id);
+        return ResponseEntity.ok().body(obj.getPosts());
+    }
 
 }
